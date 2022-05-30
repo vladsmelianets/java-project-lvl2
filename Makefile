@@ -1,23 +1,23 @@
 clean:
-	.\gradlew clean
+	./gradlew clean
 
 build:
-	.\gradlew clean build
+	./gradlew clean build
 
 install:
-	.\gradlew clean install
+	./gradlew clean install
 
 run:
-	.\gradlew run
+	./gradlew run
 
 lint:
-	.\gradlew checkstyleMain
+	./gradlew checkstyleMain
 
 update-deps:
-	.\gradlew useLatestVersions
+	./gradlew useLatestVersions
 
 run-dist:
-	.\build\install\app\bin\app
+	./build/install/app/bin/app
 
 build-run: build run
 
