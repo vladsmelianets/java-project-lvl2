@@ -7,14 +7,14 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public final class PropertiesFileReader {
+public final class FileReader {
 
-    private PropertiesFileReader() {
+    private FileReader() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Map<String, String> readPropsFile(String filename) throws IOException {
-
+    @Deprecated
+    public static Map<String, String> readToMap(String filename) throws IOException {
         Map<String, String> result;
         try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(filename))) {
             result = bufferedReader.lines()
@@ -26,5 +26,13 @@ public final class PropertiesFileReader {
                     ));
         }
         return result;
+    }
+
+    public static String readToString(String filename) throws IOException {
+        StringBuilder resultBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(filename))) {
+            bufferedReader.lines().forEach(line -> resultBuilder.append(line).append("\n"));
+            return resultBuilder.toString().trim();
+        }
     }
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public final class PropsChangeDetector {
 
-    public static Map<String, String> compareProps(Map<String, String> firstProps, Map<String, String> secondProps) {
+    public Map<String, String> compareProps(Map<String, String> firstProps, Map<String, String> secondProps) {
         Set<String> keys = new LinkedHashSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 

@@ -7,6 +7,8 @@ import java.util.Map;
 
 class PropsChangeDetectorTest {
 
+    PropsChangeDetector changeDetector = new PropsChangeDetector();
+
     @Test
     void compareProps() {
         Map<String, String> firstProps = Map.of("prop1", "val1", "prop2", "val2", "prop3", "val3");
@@ -18,6 +20,6 @@ class PropsChangeDetectorTest {
                 "prop3: val3", "-",
                 "prop3: modified val3", "+");
 
-        Assertions.assertThat(PropsChangeDetector.compareProps(firstProps, secondProps)).isEqualTo(expected);
+        Assertions.assertThat(changeDetector.compareProps(firstProps, secondProps)).isEqualTo(expected);
     }
 }
