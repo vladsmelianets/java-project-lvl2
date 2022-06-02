@@ -1,17 +1,17 @@
 package hexlet.code;
 
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 public final class PropsChangeDetector {
 
     public Map<String, String> compareProps(Map<String, String> firstProps, Map<String, String> secondProps) {
-        Set<String> keys = new HashSet<>(firstProps.keySet());
+        Set<String> keys = new TreeSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 
-        Map<String, String> difference = new TreeMap<>();
+        Map<String, String> difference = new LinkedHashMap<>();
         for (String key : keys) {
             if (!secondProps.containsKey(key)) {
                 difference.put(key + ": " + firstProps.get(key), "-");
