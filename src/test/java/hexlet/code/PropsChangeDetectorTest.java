@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-class DifferTest {
+class PropsChangeDetectorTest {
 
     @Test
     void compareProps() {
@@ -18,6 +18,6 @@ class DifferTest {
                 "prop3: val3", "-",
                 "prop3: modified val3", "+");
 
-        Assertions.assertThat(Differ.compareProps(firstProps, secondProps)).isEqualTo(expected);
+        Assertions.assertThat(PropsChangeDetector.compareProps(firstProps, secondProps)).isEqualTo(expected);
     }
 }
