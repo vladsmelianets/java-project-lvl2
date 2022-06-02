@@ -1,28 +1,27 @@
 package hexlet.code;
 
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
+import java.io.IOException;
+import java.util.Map;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 0.1",
-        description = "Compares two configuration files and shows a difference.")
-public final class Differ implements Runnable {
+public final class Differ {
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
-    private String format;
-
-    @Parameters(paramLabel = "filepath1", description = "path to first file")
-    private String firstFilePath;
-
-    @Parameters(paramLabel = "filepath2", description = "path to second file")
-    private String secondFilePath;
-
-    public static String generate(String firstFilePath, String secondFilePath) {
-        return "Placeholder for Differ.generate";
+    private Differ() {
+        throw new IllegalStateException("Utility class");
     }
 
-    @Override
-    public void run() {
+    public static String generate(String firstFilePath, String secondFilePath) throws IOException {
+        JsonParser parser = new JsonParser();
 
+        Map<String, String> firstProps = parser.toMap(FileReader.readToString(firstFilePath));
+        Map<String, String> secondProps = parser.toMap(FileReader.readToString(secondFilePath));
+
+        PropsChangeDetector changeDetector = new PropsChangeDetector();
+
+        Map<String, String> differenceMap = changeDetector.compareProps(firstProps, secondProps);
+
+        StringBuilder builder = new StringBuilder();
+        differenceMap.forEach((key, val) -> builder.append(val).append(" ").append(key).append("\n"));
+
+        return builder.toString();
     }
 }

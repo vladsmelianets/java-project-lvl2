@@ -21,9 +21,7 @@ class FileReaderTest {
     @Test
     void readToString() throws IOException, URISyntaxException {
         String filePath = new File(getClass().getClassLoader().getResource("testprops.json").toURI()).toString();
-        String expected = "{\n" +
-                "  \"testPropName\": \"testValue\"\n" +
-                "}";
+        String expected = "{\n  \"testPropName\": \"testValue\"\n}";
 
         Assertions.assertThat(FileReader.readToString(filePath)).isEqualTo(expected);
     }
