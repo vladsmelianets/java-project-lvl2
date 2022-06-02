@@ -1,11 +1,11 @@
-package hexlet.code;
+package hexlet.code.parsers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
-public final class JsonParser {
+public final class JsonParser implements Parser {
 
     private final ObjectMapper mapper;
 
@@ -13,7 +13,8 @@ public final class JsonParser {
         this.mapper = new ObjectMapper();
     }
 
-    public Map<String, String> toMap(String json) throws JsonProcessingException {
+    @Override
+    public Map<String, String> parseToMap(String json) throws JsonProcessingException {
         return mapper.readValue(json, Map.class);
     }
 }

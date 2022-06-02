@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.parsers.JsonParser;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,12 +13,10 @@ public final class Differ {
 
     public static String generate(String firstFilePath, String secondFilePath) throws IOException {
         JsonParser parser = new JsonParser();
-
-        Map<String, String> firstProps = parser.toMap(FileReader.readToString(firstFilePath));
-        Map<String, String> secondProps = parser.toMap(FileReader.readToString(secondFilePath));
+        Map<String, String> firstProps = parser.parseToMap(FileReader.readToString(firstFilePath));
+        Map<String, String> secondProps = parser.parseToMap(FileReader.readToString(secondFilePath));
 
         PropsChangeDetector changeDetector = new PropsChangeDetector();
-
         Map<String, String> differenceMap = changeDetector.compareProps(firstProps, secondProps);
 
         StringBuilder builder = new StringBuilder();
