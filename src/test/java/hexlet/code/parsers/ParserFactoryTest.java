@@ -1,22 +1,26 @@
 package hexlet.code.parsers;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ParserFactoryTest {
 
-    @Test
-    void Should_ReturnJsonParser_When_GivenJsonFilename() {
-        Assertions.assertThat(ParserFactory.getParser(".json")).isInstanceOf(JsonParser.class);
+    @Test()
+    @DisplayName("Should return JsonParser when given *.json")
+    void shouldReturnJsonParserWhenGivenJsonFilename() {
+        Assertions.assertThat(ParserFactory.getParser("./file.json")).isInstanceOf(JsonParser.class);
     }
 
     @Test
-    void Should_ReturnYamlParser_When_GivenYamlFilename() {
-        Assertions.assertThat(ParserFactory.getParser(".yaml")).isInstanceOf(YamlParser.class);
+    @DisplayName("Should return YamlParser when given *.yaml")
+    void shouldReturnYamlParserWhenGivenYamlFilename() {
+        Assertions.assertThat(ParserFactory.getParser("./file.yaml")).isInstanceOf(YamlParser.class);
     }
 
     @Test
-    void Should_ThrowIllegalStateEx_When_GivenUnsupportedFilename() {
+    @DisplayName("Should throw IllegalArgumentEx when given unsupported filename")
+    void shouldThrowIllegalArgExWhenGivenUnsupportedFilename() {
         Assertions.assertThatThrownBy(() -> ParserFactory.getParser("not supported"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
