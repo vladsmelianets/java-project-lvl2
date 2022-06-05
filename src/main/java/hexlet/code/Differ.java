@@ -13,11 +13,14 @@ public final class Differ {
 
     public static String generate(String firstFilePath, String secondFilePath) throws IOException {
         JsonParser parser = new JsonParser();
-        Map<String, String> firstProps = parser.parseToMap(FileReader.readToString(firstFilePath));
-        Map<String, String> secondProps = parser.parseToMap(FileReader.readToString(secondFilePath));
+
+        Map<String, Object> firstProps = parser.parseToMap(FileReader.readToString(firstFilePath));
+        Map<String, Object> secondProps = parser.parseToMap(FileReader.readToString(secondFilePath));
+
+
 
         PropsChangeDetector changeDetector = new PropsChangeDetector();
-        Map<String, String> differenceMap = changeDetector.compareProps(firstProps, secondProps);
+        Map<String, Object> differenceMap = changeDetector.compareProps(firstProps, secondProps);
 
         StringBuilder builder = new StringBuilder();
         differenceMap.forEach((key, val) -> builder.append(val).append(" ").append(key).append("\n"));

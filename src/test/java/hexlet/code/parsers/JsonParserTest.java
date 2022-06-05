@@ -1,7 +1,6 @@
-package hexlet.code;
+package hexlet.code.parsers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.parsers.JsonParser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ class JsonParserTest {
     private final JsonParser parser = new JsonParser();
 
     @Test
-    void toMap() throws JsonProcessingException {
+    void parseToMap() throws JsonProcessingException {
         String json = "{\n  \"testPropName\": \"testValue\"\n}";
         Map<String, String> expected = Map.of("testPropName", "testValue");
 

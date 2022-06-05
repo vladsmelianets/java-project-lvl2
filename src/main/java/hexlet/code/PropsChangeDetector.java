@@ -7,11 +7,11 @@ import java.util.TreeSet;
 
 public final class PropsChangeDetector {
 
-    public Map<String, String> compareProps(Map<String, String> firstProps, Map<String, String> secondProps) {
+    public Map<String, Object> compareProps(Map<String, Object> firstProps, Map<String, Object> secondProps) {
         Set<String> keys = new TreeSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 
-        Map<String, String> difference = new LinkedHashMap<>();
+        Map<String, Object> difference = new LinkedHashMap<>();
         for (String key : keys) {
             if (!secondProps.containsKey(key)) {
                 difference.put(key + ": " + firstProps.get(key), "-");
