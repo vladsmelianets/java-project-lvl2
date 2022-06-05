@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+//TODO consider change name or move all to Differ
 public final class PropsChangeDetector {
 
     public Map<String, Object> compareProps(Map<String, Object> firstProps, Map<String, Object> secondProps) {

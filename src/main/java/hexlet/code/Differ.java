@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.parsers.JsonParser;
+import hexlet.code.parsers.ParserFactory;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,19 +12,16 @@ public final class Differ {
     }
 
     public static String generate(String firstFilePath, String secondFilePath) throws IOException {
-        JsonParser parser = new JsonParser();
+        Map<String, Object> firstProps = ParserFactory.getParser(firstFilePath)
+                .parseToMap(FileReader.readToString(firstFilePath));
+        Map<String, Object> secondProps = ParserFactory.getParser(secondFilePath)
+                .parseToMap(FileReader.readToString(secondFilePath));
 
-        Map<String, Object> firstProps = parser.parseToMap(FileReader.readToString(firstFilePath));
-        Map<String, Object> secondProps = parser.parseToMap(FileReader.readToString(secondFilePath));
+        Map<String, Object> differenceMap = new PropsChangeDetector().compareProps(firstProps, secondProps);
 
+        StringBuilder result = new StringBuilder();
+        differenceMap.forEach((key, val) -> result.append(val).append(" ").append(key).append("\n"));
 
-
-        PropsChangeDetector changeDetector = new PropsChangeDetector();
-        Map<String, Object> differenceMap = changeDetector.compareProps(firstProps, secondProps);
-
-        StringBuilder builder = new StringBuilder();
-        differenceMap.forEach((key, val) -> builder.append(val).append(" ").append(key).append("\n"));
-
-        return builder.toString();
+        return result.toString();
     }
 }
