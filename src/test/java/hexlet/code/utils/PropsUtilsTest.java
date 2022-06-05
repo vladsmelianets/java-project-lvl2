@@ -1,13 +1,11 @@
-package hexlet.code;
+package hexlet.code.utils;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-class PropsChangeDetectorTest {
-
-    private final PropsChangeDetector changeDetector = new PropsChangeDetector();
+class PropsUtilsTest {
 
     @Test
     void compareProps() {
@@ -20,6 +18,6 @@ class PropsChangeDetectorTest {
                 "prop3: val3", "-",
                 "prop3: modified val3", "+");
 
-        Assertions.assertThat(changeDetector.compareProps(firstProps, secondProps)).isEqualTo(expected);
+        Assertions.assertThat(PropsUtils.getDifference(firstProps, secondProps)).isEqualTo(expected);
     }
 }

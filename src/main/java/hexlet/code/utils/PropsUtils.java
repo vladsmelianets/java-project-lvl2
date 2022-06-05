@@ -1,14 +1,17 @@
-package hexlet.code;
+package hexlet.code.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-//TODO consider change name or move all to Differ
-public final class PropsChangeDetector {
+public final class PropsUtils {
 
-    public Map<String, Object> compareProps(Map<String, Object> firstProps, Map<String, Object> secondProps) {
+    private PropsUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static Map<String, Object> getDifference(Map<String, Object> firstProps, Map<String, Object> secondProps) {
         Set<String> keys = new TreeSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 
