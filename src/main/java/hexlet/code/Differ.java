@@ -19,10 +19,9 @@ public final class Differ {
         Map<String, Object> secondProps = ParserFactory.getParser(secondFilePath)
                 .parseToMap(FileUtils.readToString(secondFilePath));
 
-        Map<String, Object> differenceMap = PropsUtils.getDifference(firstProps, secondProps);
+        Map<String, String> differenceMap = PropsUtils.getDifference(firstProps, secondProps);
 
-        StringBuilder result = new StringBuilder();
-        differenceMap.forEach((key, val) -> result.append(val).append(" ").append(key).append("\n"));
+        StringBuilder result = new StylishFormatter().format(differenceMap);
 
         return result.toString();
     }

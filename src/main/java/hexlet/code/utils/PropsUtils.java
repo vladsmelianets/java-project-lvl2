@@ -11,11 +11,11 @@ public final class PropsUtils {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Map<String, Object> getDifference(Map<String, Object> firstProps, Map<String, Object> secondProps) {
+    public static Map<String, String> getDifference(Map<String, Object> firstProps, Map<String, Object> secondProps) {
         Set<String> keys = new TreeSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 
-        Map<String, Object> difference = new LinkedHashMap<>();
+        Map<String, String> difference = new LinkedHashMap<>();
         for (String key : keys) {
             if (!secondProps.containsKey(key)) {
                 difference.put(key + ": " + firstProps.get(key), "-");
