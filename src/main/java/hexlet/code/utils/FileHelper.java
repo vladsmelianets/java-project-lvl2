@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public final class FileUtils {
+public final class FileHelper {
 
-    private FileUtils() {
+    private FileHelper() {
         throw new IllegalStateException("Utility class");
     }
 
