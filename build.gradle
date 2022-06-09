@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.adarshr.test-logger' version '3.2.0'
+    id 'jacoco'
 }
 
 group 'hexlet.code'
@@ -35,4 +37,17 @@ run {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+testlogger {
+    theme 'plain'
+    showStandardStreams true
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+    }
 }

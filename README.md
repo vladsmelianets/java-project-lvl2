@@ -5,4 +5,5 @@
 [![Java CI Status](https://github.com/vladsmelianets/java-project-lvl2/actions/workflows/java-ci.yml/badge.svg)](https://github.com/vladsmelianets/java-project-lvl2/actions/workflows/java-ci.yml)
 
 ### Code Climate
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/vladsmelianets/java-project-lvl2)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f38584e67886ea6a57ba/maintainability)](https://codeclimate.com/github/vladsmelianets/java-project-lvl2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f38584e67886ea6a57ba/test_coverage)](https://codeclimate.com/github/vladsmelianets/java-project-lvl2/test_coverage)
