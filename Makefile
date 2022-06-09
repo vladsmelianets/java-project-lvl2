@@ -24,6 +24,7 @@ report:
 lint:
 	./gradlew checkstyleMain checkstyleTest
 
-#build-run: build run
+build-run: build run
 
 .PHONY: build
+.PHONY: test
