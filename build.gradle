@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
     id 'checkstyle'
     id 'com.adarshr.test-logger' version '3.2.0'
     id 'jacoco'
