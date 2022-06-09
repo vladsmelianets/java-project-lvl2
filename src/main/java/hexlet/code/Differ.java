@@ -38,16 +38,20 @@ public final class Differ {
         for (String key : keys) {
             Object firstVal = ifNullThenToNullLiteral(firstProps.get(key));
             Object secondVal = ifNullThenToNullLiteral(secondProps.get(key));
+            Map<ChangeStatus, Object> changes = new LinkedHashMap<>();
             if (!secondProps.containsKey(key)) {
-                difference.put(key, Map.of(ChangeStatus.REMOVED, firstVal));
+                changes.put(ChangeStatus.REMOVED, firstVal);
+                difference.put(key, changes);
             } else if (!firstProps.containsKey(key)) {
-                difference.put(key, Map.of(ChangeStatus.ADDED, secondVal));
+                changes.put(ChangeStatus.ADDED, secondVal);
+                difference.put(key, changes);
             } else if (firstVal.equals(secondVal)) {
-                difference.put(key, Map.of(ChangeStatus.NOT_MODIFIED, firstVal));
+                changes.put(ChangeStatus.NOT_MODIFIED, firstVal);
+                difference.put(key, changes);
             } else {
-                difference.put(key, Map.of(
-                        ChangeStatus.REMOVED, firstVal,
-                        ChangeStatus.ADDED, secondVal));
+                changes.put(ChangeStatus.REMOVED, firstVal);
+                changes.put(ChangeStatus.ADDED, secondVal);
+                difference.put(key, changes);
             }
         }
         return difference;
