@@ -11,25 +11,17 @@ public final class StylishFormatter implements Formatter {
         StringBuilder result = new StringBuilder("{" + System.lineSeparator());
         for (Map.Entry<String, Map<ChangeStatus, Object>> entry : differenceMap.entrySet()) {
             Map<ChangeStatus, Object> propChanges = entry.getValue();
+
             if (propChanges.containsKey(ChangeStatus.NOT_MODIFIED)) {
-                result.append("    ")
-                        .append(entry.getKey())
-                        .append(": ")
-                        .append(propChanges.get(ChangeStatus.NOT_MODIFIED))
+                result.append(String.format("    %s: %s", entry.getKey(), propChanges.get(ChangeStatus.NOT_MODIFIED)))
                         .append(System.lineSeparator());
             }
             if (propChanges.containsKey(ChangeStatus.REMOVED)) {
-                result.append("  - ")
-                        .append(entry.getKey())
-                        .append(": ")
-                        .append(propChanges.get(ChangeStatus.REMOVED))
+                result.append(String.format("  - %s: %s", entry.getKey(), propChanges.get(ChangeStatus.REMOVED)))
                         .append(System.lineSeparator());
             }
             if (propChanges.containsKey(ChangeStatus.ADDED)) {
-                result.append("  + ")
-                        .append(entry.getKey())
-                        .append(": ")
-                        .append(propChanges.get(ChangeStatus.ADDED))
+                result.append(String.format("  + %s: %s", entry.getKey(), propChanges.get(ChangeStatus.ADDED)))
                         .append(System.lineSeparator());
             }
         }
