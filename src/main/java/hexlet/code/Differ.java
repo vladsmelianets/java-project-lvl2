@@ -28,6 +28,10 @@ public final class Differ {
         return FormatterFactory.getFormatter(formatterName).format(differenceMap);
     }
 
+    public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     private static Map<String, Map<ChangeStatus, Object>> getDifference(Map<String, Object> firstProps,
             Map<String, Object> secondProps) {
 

@@ -65,4 +65,10 @@ class DifferTest {
     void shouldReturnJsonDiffWhenYamlsAndJson() throws IOException {
         Assertions.assertThat(Differ.generate(yamlPath1, yamlPath2, "json")).isEqualTo(expectedJson);
     }
+
+    @Test
+    @DisplayName("Should return stylish diff by default")
+    void shouldReturnStylishDiffByDefault() throws IOException {
+        Assertions.assertThat(Differ.generate(yamlPath1, yamlPath2)).isEqualTo(expectedStylish);
+    }
 }
