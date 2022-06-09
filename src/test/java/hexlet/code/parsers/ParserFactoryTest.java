@@ -15,7 +15,7 @@ class ParserFactoryTest {
     @Test
     @DisplayName("Should return YamlParser when given *.yaml")
     void shouldReturnYamlParserWhenGivenYamlFilename() {
-        Assertions.assertThat(ParserFactory.getParser("./file.yaml")).isInstanceOf(YamlParser.class);
+        Assertions.assertThat(ParserFactory.getParser("./file.yml")).isInstanceOf(YamlParser.class);
     }
 
     @Test

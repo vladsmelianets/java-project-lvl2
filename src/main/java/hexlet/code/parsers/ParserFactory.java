@@ -7,7 +7,7 @@ public final class ParserFactory {
     }
 
     public static Parser getParser(String filename) {
-        if (filename.contains(".yaml")) {
+        if (filename.contains(".yml")) {
             return new YamlParser();
         }
         if (filename.contains(".json")) {

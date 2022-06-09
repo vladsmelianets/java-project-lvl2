@@ -27,4 +27,3 @@ lint:
 build-run: build run
 
 .PHONY: build
-.PHONY: test

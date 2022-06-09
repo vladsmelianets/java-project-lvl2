@@ -15,9 +15,9 @@ class DifferTest {
             .toURI()).toString();
     private String jsonPath2 = new File(getClass().getClassLoader().getResource("nested-json-fixture-2.json")
             .toURI()).toString();
-    private String yamlPath1 = new File(getClass().getClassLoader().getResource("nested-yaml-fixture-1.yaml")
+    private String yamlPath1 = new File(getClass().getClassLoader().getResource("nested-yaml-fixture-1.yml")
             .toURI()).toString();
-    private String yamlPath2 = new File(getClass().getClassLoader().getResource("nested-yaml-fixture-2.yaml")
+    private String yamlPath2 = new File(getClass().getClassLoader().getResource("nested-yaml-fixture-2.yml")
             .toURI()).toString();
 
     private String expectedStylish = Files.contentOf(
