@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
-public final class JsonParser implements Parser {
+final class JsonParser implements Parser {
 
     private final ObjectMapper mapper;
 
-    public JsonParser() {
+    JsonParser() {
         this.mapper = new ObjectMapper(new JsonFactory());
     }
 

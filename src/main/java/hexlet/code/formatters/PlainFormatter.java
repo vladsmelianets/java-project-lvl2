@@ -4,7 +4,7 @@ import hexlet.code.ChangeStatus;
 
 import java.util.Map;
 
-public final class PlainFormatter implements Formatter {
+final class PlainFormatter implements Formatter {
 
     @Override
     public String format(Map<String, Map<ChangeStatus, Object>> differenceMap) {

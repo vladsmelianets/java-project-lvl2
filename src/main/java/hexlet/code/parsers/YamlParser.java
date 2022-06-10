@@ -6,11 +6,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.util.Map;
 
-public final class YamlParser implements Parser {
+final class YamlParser implements Parser {
 
     private final ObjectMapper mapper;
 
-    public YamlParser() {
+    YamlParser() {
         this.mapper = new ObjectMapper(new YAMLFactory());
     }
 
