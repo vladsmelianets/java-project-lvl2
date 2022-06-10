@@ -67,8 +67,14 @@ class DifferTest {
     }
 
     @Test
-    @DisplayName("Should return stylish diff by default")
-    void shouldReturnStylishDiffByDefault() throws IOException {
+    @DisplayName("Should return stylish diff by default when given yamls without format param")
+    void shouldReturnStylishDiffByDefaultWhenYamls() throws IOException {
         Assertions.assertThat(Differ.generate(yamlPath1, yamlPath2)).isEqualTo(expectedStylish);
+    }
+
+    @Test
+    @DisplayName("Should return stylish diff by default when given yamls without format param")
+    void shouldReturnStylishDiffByDefaultWhenJsons() throws IOException {
+        Assertions.assertThat(Differ.generate(jsonPath1, jsonPath2)).isEqualTo(expectedStylish);
     }
 }
