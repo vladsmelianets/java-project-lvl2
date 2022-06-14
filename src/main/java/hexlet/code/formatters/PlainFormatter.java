@@ -12,9 +12,10 @@ final class PlainFormatter implements Formatter {
         for (Map.Entry<String, Map<ChangeStatus, Object>> entry : differenceMap.entrySet()) {
             Map<ChangeStatus, Object> propChanges = entry.getValue();
 
-            if (propChanges.containsKey(ChangeStatus.REMOVED) && propChanges.containsKey(ChangeStatus.ADDED)) {
-                String removed = formatValue(propChanges.get(ChangeStatus.REMOVED));
-                String added = formatValue(propChanges.get(ChangeStatus.ADDED));
+            if (propChanges.containsKey(ChangeStatus.MODIFIED_FROM)
+                    && propChanges.containsKey(ChangeStatus.MODIFIED_TO)) {
+                String removed = formatValue(propChanges.get(ChangeStatus.MODIFIED_FROM));
+                String added = formatValue(propChanges.get(ChangeStatus.MODIFIED_TO));
                 result.append(String.format("Property '%s' was updated. From %s to %s%s",
                         entry.getKey(), removed, added, System.lineSeparator()));
             } else if (propChanges.containsKey(ChangeStatus.REMOVED)) {

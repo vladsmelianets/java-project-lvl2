@@ -15,13 +15,17 @@ final class StylishFormatter implements Formatter {
             if (propChanges.containsKey(ChangeStatus.NOT_MODIFIED)) {
                 result.append(String.format("    %s: %s", entry.getKey(), propChanges.get(ChangeStatus.NOT_MODIFIED)))
                         .append(System.lineSeparator());
-            }
-            if (propChanges.containsKey(ChangeStatus.REMOVED)) {
+            } else if (propChanges.containsKey(ChangeStatus.REMOVED)) {
                 result.append(String.format("  - %s: %s", entry.getKey(), propChanges.get(ChangeStatus.REMOVED)))
                         .append(System.lineSeparator());
-            }
-            if (propChanges.containsKey(ChangeStatus.ADDED)) {
+            } else if (propChanges.containsKey(ChangeStatus.ADDED)) {
                 result.append(String.format("  + %s: %s", entry.getKey(), propChanges.get(ChangeStatus.ADDED)))
+                        .append(System.lineSeparator());
+            } else if (propChanges.containsKey(ChangeStatus.MODIFIED_FROM)
+                    && propChanges.containsKey(ChangeStatus.MODIFIED_TO)) {
+                result.append(String.format("  - %s: %s", entry.getKey(), propChanges.get(ChangeStatus.MODIFIED_FROM)))
+                        .append(System.lineSeparator())
+                        .append(String.format("  + %s: %s", entry.getKey(), propChanges.get(ChangeStatus.MODIFIED_TO)))
                         .append(System.lineSeparator());
             }
         }

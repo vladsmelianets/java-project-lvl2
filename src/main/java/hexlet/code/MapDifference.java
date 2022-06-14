@@ -32,8 +32,8 @@ public final class MapDifference {
                 changes.put(ChangeStatus.NOT_MODIFIED, firstVal);
                 difference.put(key, changes);
             } else {
-                changes.put(ChangeStatus.REMOVED, firstVal);
-                changes.put(ChangeStatus.ADDED, secondVal);
+                changes.put(ChangeStatus.MODIFIED_FROM, firstVal);
+                changes.put(ChangeStatus.MODIFIED_TO, secondVal);
                 difference.put(key, changes);
             }
         }
