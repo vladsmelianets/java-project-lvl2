@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public final class MapCompareUtils {
+public final class MapDifference {
 
-    private MapCompareUtils() {
+    private MapDifference() {
         throw new IllegalStateException("Utility class");
     }
 
