@@ -22,50 +22,17 @@ class DifferTest {
     }
 
     @ParameterizedTest
-    @DisplayName("Should return stylish diff when given stylish format param")
+    @DisplayName("Should return diff depending on format param")
     @ValueSource(strings = {"json", "yml"})
-    void shouldReturnStylishDiffWhenGivenStylishFormatParam(String format) throws Exception {
+    void shouldReturnDiffDependingOnFormatParam(String format) throws Exception {
         String filePath1 = new File(getClass().getClassLoader().getResource("nested-fixture-1." + format)
                 .toURI()).toString();
         String filePath2 = new File(getClass().getClassLoader().getResource("nested-fixture-2." + format)
                 .toURI()).toString();
 
         Assertions.assertThat(Differ.generate(filePath1, filePath2, "stylish")).isEqualTo(expectedStylish);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Should return plain diff when given plain format param")
-    @ValueSource(strings = {"json", "yml"})
-    void shouldReturnPlainDiffWhenGivenPlainFormatParam(String format) throws Exception {
-        String filePath1 = new File(getClass().getClassLoader().getResource("nested-fixture-1." + format)
-                .toURI()).toString();
-        String filePath2 = new File(getClass().getClassLoader().getResource("nested-fixture-2." + format)
-                .toURI()).toString();
-
         Assertions.assertThat(Differ.generate(filePath1, filePath2, "plain")).isEqualTo(expectedPlain);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Should return json diff when given json format param")
-    @ValueSource(strings = {"json", "yml"})
-    void shouldReturnJsonDiffWhenGivenJsonFormatParam(String format) throws Exception {
-        String filePath1 = new File(getClass().getClassLoader().getResource("nested-fixture-1." + format)
-                .toURI()).toString();
-        String filePath2 = new File(getClass().getClassLoader().getResource("nested-fixture-2." + format)
-                .toURI()).toString();
-
         Assertions.assertThat(Differ.generate(filePath1, filePath2, "json")).isEqualTo(expectedJson);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Should return stylish diff by default when without format param")
-    @ValueSource(strings = {"json", "yml"})
-    void shouldReturnStylishDiffByDefault(String format) throws Exception {
-        String filePath1 = new File(getClass().getClassLoader().getResource("nested-fixture-1." + format)
-                .toURI()).toString();
-        String filePath2 = new File(getClass().getClassLoader().getResource("nested-fixture-2." + format)
-                .toURI()).toString();
-
         Assertions.assertThat(Differ.generate(filePath1, filePath2)).isEqualTo(expectedStylish);
     }
 }

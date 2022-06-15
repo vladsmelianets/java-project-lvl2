@@ -19,7 +19,7 @@ class FormatterFactoryTest {
     }
 
     @Test
-    @DisplayName("Should return PlainFormatter when given \"plain\"")
+    @DisplayName("Should return JsonFormatter when given \"json\"")
     void shouldReturnJsonFormatterWhenGivenJson() {
         Assertions.assertThat(FormatterFactory.getFormatter("json")).isInstanceOf(JsonFormatter.class);
     }
