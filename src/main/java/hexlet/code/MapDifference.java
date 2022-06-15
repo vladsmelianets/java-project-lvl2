@@ -20,33 +20,30 @@ public final class MapDifference {
         for (String key : keys) {
             Object firstVal = ifNullThenToNullLiteral(firstProps.get(key));
             Object secondVal = ifNullThenToNullLiteral(secondProps.get(key));
-
+            Change change;
             if (!secondProps.containsKey(key)) {
-                Change change = Change.builder()
+                change = Change.builder()
                         .status(Change.Status.DELETED)
                         .oldValue(firstVal)
                         .build();
-                difference.put(key, change);
             } else if (!firstProps.containsKey(key)) {
-                Change change = Change.builder()
+                change = Change.builder()
                         .status(Change.Status.ADDED)
                         .newValue(secondVal)
                         .build();
-                difference.put(key, change);
             } else if (firstVal.equals(secondVal)) {
-                Change change = Change.builder()
+                change = Change.builder()
                         .status(Change.Status.UNCHANGED)
                         .oldValue(firstVal)
                         .build();
-                difference.put(key, change);
             } else {
-                Change change = Change.builder()
+                change = Change.builder()
                         .status(Change.Status.CHANGED)
                         .oldValue(firstVal)
                         .newValue(secondVal)
                         .build();
-                difference.put(key, change);
             }
+            difference.put(key, change);
         }
         return difference;
     }
