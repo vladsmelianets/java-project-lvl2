@@ -21,7 +21,7 @@ public final class Differ {
         Map<String, Object> firstProps = ParserFactory.getParser(filepath1).parseToMap(firstFileContent);
         Map<String, Object> secondProps = ParserFactory.getParser(filepath2).parseToMap(secondFileContent);
 
-        Map<String, Map<ChangeStatus, Object>> difference = MapDifference.getDifference(firstProps, secondProps);
+        Map<String, Change> difference = MapDifference.getDifference(firstProps, secondProps);
 
         return FormatterFactory.getFormatter(formatterName).format(difference);
     }

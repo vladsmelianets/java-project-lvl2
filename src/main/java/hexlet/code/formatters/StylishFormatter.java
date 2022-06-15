@@ -1,32 +1,30 @@
 package hexlet.code.formatters;
 
-import hexlet.code.ChangeStatus;
+import hexlet.code.Change;
 
 import java.util.Map;
 
 final class StylishFormatter implements Formatter {
 
     @Override
-    public String format(Map<String, Map<ChangeStatus, Object>> differenceMap) {
+    public String format(Map<String, Change> differenceMap) {
         StringBuilder result = new StringBuilder("{" + System.lineSeparator());
-        for (Map.Entry<String, Map<ChangeStatus, Object>> entry : differenceMap.entrySet()) {
-            Map<ChangeStatus, Object> propChanges = entry.getValue();
-
-            if (propChanges.containsKey(ChangeStatus.NOT_MODIFIED)) {
-                result.append(String.format("    %s: %s", entry.getKey(), propChanges.get(ChangeStatus.NOT_MODIFIED)))
+        for (Map.Entry<String, Change> entry : differenceMap.entrySet()) {
+            String property = entry.getKey();
+            Change change = entry.getValue();
+            Change.Status status = change.getStatus();
+            switch (status) {
+                case UNCHANGED -> result.append(String.format("    %s: %s", property, change.getOldValue()))
                         .append(System.lineSeparator());
-            } else if (propChanges.containsKey(ChangeStatus.REMOVED)) {
-                result.append(String.format("  - %s: %s", entry.getKey(), propChanges.get(ChangeStatus.REMOVED)))
+                case DELETED -> result.append(String.format("  - %s: %s", property, change.getOldValue()))
                         .append(System.lineSeparator());
-            } else if (propChanges.containsKey(ChangeStatus.ADDED)) {
-                result.append(String.format("  + %s: %s", entry.getKey(), propChanges.get(ChangeStatus.ADDED)))
+                case ADDED -> result.append(String.format("  + %s: %s", property, change.getNewValue()))
                         .append(System.lineSeparator());
-            } else if (propChanges.containsKey(ChangeStatus.MODIFIED_FROM)
-                    && propChanges.containsKey(ChangeStatus.MODIFIED_TO)) {
-                result.append(String.format("  - %s: %s", entry.getKey(), propChanges.get(ChangeStatus.MODIFIED_FROM)))
+                case CHANGED -> result.append(String.format("  - %s: %s", property, change.getOldValue()))
                         .append(System.lineSeparator())
-                        .append(String.format("  + %s: %s", entry.getKey(), propChanges.get(ChangeStatus.MODIFIED_TO)))
+                        .append(String.format("  + %s: %s", property, change.getNewValue()))
                         .append(System.lineSeparator());
+                default -> throw new IllegalStateException("Unknown status: " + status);
             }
         }
         return result.append("}").toString();

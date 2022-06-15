@@ -1,10 +1,10 @@
 package hexlet.code.formatters;
 
-import hexlet.code.ChangeStatus;
+import hexlet.code.Change;
 
 import java.io.IOException;
 import java.util.Map;
 
 public interface Formatter {
-    String format(Map<String, Map<ChangeStatus, Object>> differenceMap) throws IOException;
+    String format(Map<String, Change> differenceMap) throws IOException;
 }

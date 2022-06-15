@@ -11,30 +11,41 @@ public final class MapDifference {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Map<String, Map<ChangeStatus, Object>> getDifference(Map<String, Object> firstProps,
-            Map<String, Object> secondProps) {
+    public static Map<String, Change> getDifference(Map<String, Object> firstProps, Map<String, Object> secondProps) {
 
         Set<String> keys = new TreeSet<>(firstProps.keySet());
         keys.addAll(secondProps.keySet());
 
-        Map<String, Map<ChangeStatus, Object>> difference = new LinkedHashMap<>();
+        Map<String, Change> difference = new LinkedHashMap<>();
         for (String key : keys) {
             Object firstVal = ifNullThenToNullLiteral(firstProps.get(key));
             Object secondVal = ifNullThenToNullLiteral(secondProps.get(key));
-            Map<ChangeStatus, Object> changes = new LinkedHashMap<>();
+
             if (!secondProps.containsKey(key)) {
-                changes.put(ChangeStatus.REMOVED, firstVal);
-                difference.put(key, changes);
+                Change change = Change.builder()
+                        .status(Change.Status.DELETED)
+                        .oldValue(firstVal)
+                        .build();
+                difference.put(key, change);
             } else if (!firstProps.containsKey(key)) {
-                changes.put(ChangeStatus.ADDED, secondVal);
-                difference.put(key, changes);
+                Change change = Change.builder()
+                        .status(Change.Status.ADDED)
+                        .newValue(secondVal)
+                        .build();
+                difference.put(key, change);
             } else if (firstVal.equals(secondVal)) {
-                changes.put(ChangeStatus.NOT_MODIFIED, firstVal);
-                difference.put(key, changes);
+                Change change = Change.builder()
+                        .status(Change.Status.UNCHANGED)
+                        .oldValue(firstVal)
+                        .build();
+                difference.put(key, change);
             } else {
-                changes.put(ChangeStatus.MODIFIED_FROM, firstVal);
-                changes.put(ChangeStatus.MODIFIED_TO, secondVal);
-                difference.put(key, changes);
+                Change change = Change.builder()
+                        .status(Change.Status.CHANGED)
+                        .oldValue(firstVal)
+                        .newValue(secondVal)
+                        .build();
+                difference.put(key, change);
             }
         }
         return difference;
