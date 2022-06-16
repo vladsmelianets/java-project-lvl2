@@ -33,13 +33,13 @@ final class PlainFormatter implements Formatter {
     }
 
     private String formatValue(Object value) {
-        String result;
-        if (value instanceof String && !value.equals("null")) {
-            result = String.format("'%s'", value);
+        if (value == null) {
+            return "null";
+        } else if (value instanceof String) {
+            return String.format("'%s'", value);
         } else {
-            result = simplifyComplexValue(value);
+            return simplifyComplexValue(value);
         }
-        return result;
     }
 
     private String simplifyComplexValue(Object value) {

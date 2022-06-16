@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -18,8 +19,8 @@ public final class MapDifference {
 
         Map<String, Change> difference = new LinkedHashMap<>();
         for (String key : keys) {
-            Object firstVal = ifNullThenToNullLiteral(firstProps.get(key));
-            Object secondVal = ifNullThenToNullLiteral(secondProps.get(key));
+            Object firstVal = firstProps.get(key);
+            Object secondVal = secondProps.get(key);
             Change change;
             if (!secondProps.containsKey(key)) {
                 change = Change.builder()
@@ -31,7 +32,7 @@ public final class MapDifference {
                         .status(Change.Status.ADDED)
                         .newValue(secondVal)
                         .build();
-            } else if (firstVal.equals(secondVal)) {
+            } else if (Objects.equals(firstVal, secondVal)) {
                 change = Change.builder()
                         .status(Change.Status.UNCHANGED)
                         .oldValue(firstVal)
@@ -46,12 +47,5 @@ public final class MapDifference {
             difference.put(key, change);
         }
         return difference;
-    }
-
-    private static Object ifNullThenToNullLiteral(Object obj) {
-        if (obj == null) {
-            obj = "null";
-        }
-        return obj;
     }
 }
