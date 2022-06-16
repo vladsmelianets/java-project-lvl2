@@ -6,13 +6,11 @@ public final class ParserFactory {
         throw new IllegalStateException("Factory class");
     }
 
-    public static Parser getParser(String filename) {
-        if (filename.contains(".yml")) {
-            return new YamlParser();
-        }
-        if (filename.contains(".json")) {
-            return new JsonParser();
-        }
-        throw new IllegalArgumentException("Unsupported file format: " + filename);
+    public static Parser getParser(FileType fileType) {
+        return switch (fileType) {
+            case YAML -> new YamlParser();
+            case JSON -> new JsonParser();
+            default -> throw new IllegalArgumentException("Unsupported file format: " + fileType);
+        };
     }
 }
