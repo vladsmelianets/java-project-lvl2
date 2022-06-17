@@ -2,6 +2,7 @@ package hexlet.code.formatters;
 
 import hexlet.code.Change;
 
+import java.util.List;
 import java.util.Map;
 
 final class PlainFormatter implements Formatter {
@@ -43,10 +44,9 @@ final class PlainFormatter implements Formatter {
     }
 
     private String simplifyComplexValue(Object value) {
-        String stringValue = value.toString();
-        if (stringValue.startsWith("[") || stringValue.startsWith("{")) {
+        if (value instanceof List<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
         }
-        return stringValue;
+        return value.toString();
     }
 }
