@@ -23,11 +23,9 @@ final class PlainFormatter implements Formatter {
                 case CHANGED -> result.append(String.format("Property '%s' was updated. From %s to %s",
                                 property, formatValue(change.getOldValue()), formatValue(change.getNewValue())))
                         .append(System.lineSeparator());
-                default -> {
-                    if (!status.equals(Change.Status.UNCHANGED)) {
-                        throw new IllegalStateException("Unknown status: " + status);
-                    }
+                case UNCHANGED -> {
                 }
+                default -> throw new IllegalStateException("Unknown status: " + status);
             }
         }
         return result.toString().trim();
