@@ -6,11 +6,11 @@ public final class FormatterFactory {
         throw new IllegalStateException("Factory class");
     }
 
-    public static Formatter getFormatter(Format format) {
+    public static Formatter getFormatter(String format) {
         return switch (format) {
-            case STYLISH -> new StylishFormatter();
-            case PLAIN -> new PlainFormatter();
-            case JSON -> new JsonFormatter();
+            case "stylish" -> new StylishFormatter();
+            case "plain" -> new PlainFormatter();
+            case "json" -> new JsonFormatter();
             default -> throw new IllegalArgumentException("Unsupported format type: " + format);
         };
     }

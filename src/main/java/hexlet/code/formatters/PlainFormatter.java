@@ -23,7 +23,7 @@ final class PlainFormatter implements Formatter {
                 case CHANGED -> result.append(String.format("Property '%s' was updated. From %s to %s",
                                 property, formatValue(change.getOldValue()), formatValue(change.getNewValue())))
                         .append(System.lineSeparator());
-                case UNCHANGED -> {
+                case UNCHANGED -> { // do nothing
                 }
                 default -> throw new IllegalStateException("Unknown status: " + status);
             }
@@ -36,15 +36,10 @@ final class PlainFormatter implements Formatter {
             return "null";
         } else if (value instanceof String) {
             return String.format("'%s'", value);
-        } else {
-            return simplifyComplexValue(value);
-        }
-    }
-
-    private String simplifyComplexValue(Object value) {
-        if (value instanceof List<?> || value instanceof Map<?, ?>) {
+        } else if (value instanceof List<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
+        } else {
+            return value.toString();
         }
-        return value.toString();
     }
 }
